@@ -6,6 +6,9 @@ Most configuration is set via environment variables.
 For local development, use a .env file to set
 environment variables.
 """
+import os
+from dotenv import load_dotenv
+load_dotenv()  # Load environment variables from .env file
 from environs import Env
 
 env = Env()
