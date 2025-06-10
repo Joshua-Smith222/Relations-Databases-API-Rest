@@ -1,0 +1,6 @@
+[run]
+source = MarketMason
+omit = 
+    tests/*
+    autoapp.py
+
