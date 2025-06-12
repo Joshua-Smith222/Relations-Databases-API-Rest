@@ -6,6 +6,7 @@ import sys
 from flask import Flask, render_template
 
 from MarketMason import commands, public, user
+from MarketMason.api import api as api_blueprint
 from MarketMason.extensions import (
     bcrypt,
     cache,
@@ -15,6 +16,7 @@ from MarketMason.extensions import (
     flask_static_digest,
     login_manager,
     migrate,
+    ma,
 )
 
 
@@ -39,6 +41,7 @@ def register_extensions(app):
     bcrypt.init_app(app)
     cache.init_app(app)
     db.init_app(app)
+    ma.init_app(app)
     csrf_protect.init_app(app)
     login_manager.init_app(app)
     debug_toolbar.init_app(app)
@@ -51,6 +54,7 @@ def register_blueprints(app):
     """Register Flask blueprints."""
     app.register_blueprint(public.views.blueprint)
     app.register_blueprint(user.views.blueprint)
+    app.register_blueprint(api_blueprint)
     return None
 
 
