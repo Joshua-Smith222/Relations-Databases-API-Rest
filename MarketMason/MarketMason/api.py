@@ -3,12 +3,17 @@ from flask import Blueprint, request, jsonify, abort
 from .extensions import db
 from .user.models import User
 from MarketMason.user.schemas import user_schema, users_schema
+from .extensions import csrf_protect
 # from .product.models import Product
 # from .product.schemas import product_schema, products_schema
 # from .order.models   import Order
 # from .order.schemas  import order_schema, orders_schema
 
 api = Blueprint('api', __name__, url_prefix='/api')
+
+#tell CSRF to not wrap any api routes
+csrf_protect.exempt(api)
+# CSRF protection is disabled for API routes
 
 # — Users —
 @api.route('/users', methods=['GET'])
