@@ -1,4 +1,5 @@
 from MarketMason.extensions import db
+from MarketMason.order.models import order_product
 
 class Product(db.Model):
     __tablename__ = 'products'
