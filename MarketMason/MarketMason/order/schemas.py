@@ -12,22 +12,14 @@ class OrderSchema(ma.SQLAlchemyAutoSchema):
         fields = (
             'id',
             'order_date',
-            'customer_name',
-            'total_amount',
+            'user_id',
             'products'
         )
         unknown = EXCLUDE
 
     @pre_load
     def normalize_keys(self, data, **kwargs):
-        normalized = {}
-        for key, val in data.items():
-            lk = key.lower()
-            if lk in ('customer_name', 'order_date'):
-                normalized[lk] = val
-            else:
-                normalized[key] = val
-        return normalized
+        return { k.lower(): v for k, v in data.items() }
 
 order_schema   = OrderSchema()
 orders_schema  = OrderSchema(many=True)
