@@ -53,7 +53,7 @@ def get_orders():
 def create_order():
     """POST /api/orders → create a new order"""
     data = request.get_json() or {}
-    o = order_schema.load(data, session=db.session)
-    db.session.add(o)
+    order = order_schema.load(data, session=db.session)
+    db.session.add(order)
     db.session.commit()
-    return order_schema.jsonify(o), 201
+    return order_schema.jsonify(order), 201
