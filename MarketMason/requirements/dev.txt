@@ -7,6 +7,10 @@ pytest==8.3.5
 pytest-cov==6.1.1
 WebTest==3.0.4
 
+# Serialization
+flask-marshmallow==1.3.0
+marshmallow-sqlalchemy==1.4.2
+
 # Lint and code style
 black==25.1.0
 flake8-blind-except==0.2.1
