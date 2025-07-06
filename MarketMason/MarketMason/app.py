@@ -33,6 +33,12 @@ def create_app(config_object="MarketMason.settings"):
     register_shellcontext(app)
     register_commands(app)
     configure_logger(app)
+        # right before `return app`
+    print("\n--- REGISTERED ROUTES ---")
+    for rule in app.url_map.iter_rules():
+        print(f"{rule.methods} -> {rule.rule}")
+    print("-------------------------\n")
+
     return app
 
 
@@ -54,7 +60,8 @@ def register_blueprints(app):
     """Register Flask blueprints."""
     app.register_blueprint(public.views.blueprint)
     app.register_blueprint(user.views.blueprint)
-    app.register_blueprint(api_blueprint)
+    app.register_blueprint(api_blueprint, url_prefix="/api")
+
     return None
 
 
@@ -93,3 +100,8 @@ def configure_logger(app):
     handler = logging.StreamHandler(sys.stdout)
     if not app.logger.handlers:
         app.logger.addHandler(handler)
+
+if __name__ == "__main__":
+    # Create the app and run it in debug mode on port 5000
+    app = create_app()
+    app.run(debug=True, host="127.0.0.1", port=5000)
