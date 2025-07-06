@@ -38,3 +38,7 @@ Flask-DebugToolbar==0.16.0
 
 # Environment variable parsing
 environs==14.2.0
+
+# Serialization
+flask-marshmallow==1.3.0
+marshmallow-sqlalchemy==1.4.2
